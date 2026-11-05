@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+SHARE="${HOME}/.local/share/lee-insects"
+BIN="${HOME}/.local/bin"
+mkdir -p "$SHARE" "$BIN"
+install -m 0755 "$ROOT/lee_insects_widget.py" "$SHARE/lee_insects_widget.py"
+install -m 0644 "$ROOT/desklet_geometry.py" "$SHARE/desklet_geometry.py"
+python3 "$ROOT/unpack_sprites.py" "$ROOT/sprites" "$SHARE/sprites"
+ln -sfn "$SHARE/lee_insects_widget.py" "$BIN/butterflies"
+ln -sfn "$SHARE/lee_insects_widget.py" "$BIN/insects"
+ln -sfn "$SHARE/lee_insects_widget.py" "$BIN/lee-insects-widget"
+echo "Installed."
+echo "  Run: butterflies"
+echo "  It does not start at login until you tick Open at login."
